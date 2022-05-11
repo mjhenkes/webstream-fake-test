@@ -1,6 +1,4 @@
-/// <reference types="cypress" />
-describe('page', () => {
-  it('works', () => {
-    cy.visit('https://example.cypress.io')
-  })
+it('video', () => {
+  cy.visit('index.html')
+  cy.get('#get-access').click()
 })

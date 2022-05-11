@@ -18,4 +18,22 @@
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
+
+  on('before:browser:launch', (browser = {}, launchOptions) => {
+    if (browser.family === 'chromium') {
+      // Mac/Linux
+      launchOptions.args.push(
+        '--use-fake-ui-for-media-stream',
+        '--use-fake-device-for-media-stream',
+        '--use-file-for-fake-video-capture=cypress/fixtures/akiyo_qcif.y4m'
+        // '--use-file-for-fake-video-capture=cypress/fixtures/sample_640x360.mpeg'
+        // '--use-file-for-fake-video-capture=cypress/fixtures/sample-5s.mp4'
+      )
+
+      // Windows
+      // launchOptions.args.push('--use-file-for-fake-video-capture=c:\\path\\to\\video\\my-video.y4m')
+    }
+
+    return launchOptions
+  })
 }
